@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'maven-publish'
 }
 
 group 'dev.selena'
@@ -55,6 +56,29 @@ shadowJar {
     }
 
     configurations = [project.configurations.getByName("runtimeClasspath")]
+}
+
+// Configures the publishing
+publishing {
+    repositories {
+        // The target repository
+        maven {
+            // Choose whatever name you want
+            name = "GlitchAPI"
+            // The url of the repository, where the artifacts will be published
+            url = "https://maven.pkg.github.com/RedW0lfStoneYT/GlitchAPI"
+            credentials {
+                // The credentials (described in the next section)
+                username = "RedW0lfStoneYT"
+                password = "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"
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
 }
 
 
