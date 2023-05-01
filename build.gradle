@@ -54,7 +54,5 @@ shadowJar {
         from subproject.sourceSets.main.output.resourcesDir
     }
 
-
     configurations = [project.configurations.getByName("runtimeClasspath")]
-
 }
