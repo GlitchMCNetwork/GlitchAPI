@@ -61,7 +61,7 @@ shadowJar {
 publishing {
     repositories {
         maven {
-            name = "GitHubPackages"
+            name = "GlitchAPI"
             url = uri("https://maven.pkg.github.com/RedW0lfStoneYT/GlitchAPI")
             credentials {
                 username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
