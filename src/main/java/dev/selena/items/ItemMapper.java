@@ -73,6 +73,7 @@ public class ItemMapper {
             nbtItem.setBoolean(NBTConsts.COMMANDS_ENABLED, true);
         }
 
+        nbtItem.setBoolean(NBTConsts.USABLE, Usable);
         item = nbtItem.getItem();
         ItemMeta meta = item.getItemMeta();
         if (Glowing && (Enchants == null || Enchants.isEmpty())) {
@@ -80,7 +81,6 @@ public class ItemMapper {
             meta.addEnchant(Enchantment.LUCK, 1, true);
         }
 
-        nbtItem.setBoolean(NBTConsts.USABLE, Usable);
 
         if (!(Enchants == null || Enchants.isEmpty())) {
             for (String enchant : Enchants.keySet()) {
@@ -120,4 +120,6 @@ public class ItemMapper {
 
         return item;
     }
+
+
 }
