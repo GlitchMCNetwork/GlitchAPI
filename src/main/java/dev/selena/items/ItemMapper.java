@@ -3,7 +3,6 @@ package dev.selena.items;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import dev.selena.consts.NBTConsts;
 import dev.selena.text.ContentUtils;
-import dev.selena.text.MessageUtils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -108,7 +107,7 @@ public class ItemMapper {
         if (ItemUtils.isArmor(item) && item.getType().toString().startsWith("LEATHER")) {
             LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) item.getItemMeta();
             if (Material_Color != null) {
-                Color color = Color.decode(MessageUtils.placeholders(Material_Color).replace("<", "").replace(">", ""));
+                Color color = Color.decode(Material_Color.replace("<", "").replace(">", ""));
                 org.bukkit.Color mcColor = org.bukkit.Color.fromRGB(color.getRed(), color.getGreen(), color.getBlue());
 
                 leatherArmorMeta.setColor(mcColor);

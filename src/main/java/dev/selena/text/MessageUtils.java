@@ -1,5 +1,9 @@
 package dev.selena.text;
 
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
 public class MessageUtils {
 
 
@@ -11,7 +15,10 @@ public class MessageUtils {
         return output.toString();
     }
 
-    public static String placeholders(String material_color) {
-        return null;
+    public static void sendPlayer(String content, Player receiver, CommandSender sender) {
+        if (!receiver.isOnline())
+            sender.sendMessage(ChatColor.RED + "That player is not online");
+        receiver.sendMessage(ContentUtils.color(content));
     }
+
 }
