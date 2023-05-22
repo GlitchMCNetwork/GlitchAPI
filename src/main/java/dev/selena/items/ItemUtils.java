@@ -2,10 +2,16 @@ package dev.selena.items;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
-public class ItemUtils {
+public class ItemUtils implements Listener {
 
+    /***
+     * Deletes the item in the players hand
+     * @param player The player you want to delete the item from
+     * @param amount The amount of items you want to delete
+     */
     public static void deleteItemInHand(Player player, int amount) {
         ItemStack item = player.getInventory().getItemInHand();
         int newAmount = item.getAmount() - amount;
@@ -16,6 +22,10 @@ public class ItemUtils {
         player.getInventory().setItemInHand(new ItemStack(Material.AIR));
     }
 
+    /***
+     * @param item the itemstack in question
+     * @return true if the item is armor
+     */
     public static boolean isArmor(ItemStack item) {
         switch (item.getType()) {
             // Leather
@@ -48,4 +58,6 @@ public class ItemUtils {
                 return false;
         }
     }
+
+
 }
