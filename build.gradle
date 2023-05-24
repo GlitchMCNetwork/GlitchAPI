@@ -37,6 +37,7 @@ dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
     compileOnly 'me.clip:placeholderapi:2.11.3'
     compileOnly('com.mojang:authlib:1.5.21')
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
 }
 
 build {
@@ -62,9 +63,11 @@ shadowJar {
         include(dependency('com.google.code.gson:gson'))
         include(dependency('de.tr7zw:item-nbt-api'))
         include(dependency('com.google.guava:guava'))
+        include(dependency('com.squareup.okhttp3:okhttp'))
     }
     relocate "com.google", "dev.selena.libs"
     relocate "de.tr7zw.changeme", "dev.selena.libs"
+    relocate "com.squareup.okhttp3", "dev.selena.libs"
 
     zip64 true
     subprojects.each { subproject ->
