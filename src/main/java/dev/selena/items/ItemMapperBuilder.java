@@ -3,6 +3,7 @@ package dev.selena.items;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class ItemMapperBuilder {
 
@@ -10,7 +11,13 @@ public class ItemMapperBuilder {
     private String itemType = null;
     private String itemColor = null;
     private String title = null;
+    private String skullTexture = null;
+    private String skullUuid = null;
     private List<String> loreLines = null;
+    private final Map<String, String> nbtStrings = new TreeMap<>();
+    private final Map<String, Boolean> nbtBooleans = new TreeMap<>();
+    private final Map<String, Integer> nbtInts = new TreeMap<>();
+    private final Map<String, Float> nbtFloats = new TreeMap<>();
     private boolean glowing = false;
     private Map<String, Integer> enchants = null;
     private boolean usable = true;
@@ -140,12 +147,43 @@ public class ItemMapperBuilder {
         return this;
     }
 
+
+    public ItemMapperBuilder skullTexture(String texture) {
+        this.skullTexture = texture;
+        return this;
+    }
+
+    public ItemMapperBuilder skullUuid(String uuid) {
+        this.skullUuid = uuid;
+        return this;
+    }
+
+    public ItemMapperBuilder addNBTString(String name, String value) {
+        this.nbtStrings.put(name, value);
+        return this;
+    }
+
+    public ItemMapperBuilder addNBTBoolean(String name, boolean value) {
+        this.nbtBooleans.put(name, Boolean.valueOf(value));
+        return this;
+    }
+
+    public ItemMapperBuilder addNBTInt(String name, int value) {
+        this.nbtInts.put(name, Integer.valueOf(value));
+        return this;
+    }
+
+    public ItemMapperBuilder addNBTFloat(String name, float value) {
+        this.nbtFloats.put(name, Float.valueOf(value));
+        return this;
+    }
+
     /***
      * Builds the item into the ItemMapper class
      * @return ItemMapper
      */
     public ItemMapper build() {
-        return new ItemMapper(entityName, itemType, itemColor, title, loreLines, glowing, enchants, usable, amount, commandItem, commands);
+        return new ItemMapper(this.entityName, this.itemType, this.itemColor, this.title, this.loreLines, this.glowing, this.enchants, this.usable, this.amount, this.commandItem, this.commands, this.skullTexture, this.skullUuid, this.nbtStrings, this.nbtBooleans, this.nbtInts, this.nbtFloats);
     }
 
 }

@@ -1,5 +1,7 @@
 package dev.selena.items;
 
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import dev.selena.consts.NBTConsts;
 import dev.selena.text.ContentUtils;
@@ -9,11 +11,14 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.awt.*;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class ItemMapper {
 
@@ -22,6 +27,12 @@ public class ItemMapper {
     public String Material_Type;
     public String Material_Color;
     public String Display_Name;
+    public String Skull_Texture;
+    public String Skull_UUID;
+    public Map<String, String> NBT_Strings;
+    public Map<String, Boolean> NBT_Booleans;
+    public Map<String, Integer> NBT_Integers;
+    public Map<String, Float> NBT_Floats;
     public List<String> Lore_Lines;
     public boolean Glowing;
     public boolean Usable;
@@ -31,11 +42,17 @@ public class ItemMapper {
     public boolean Right_Click_Command_Enabled;
     public String[] Commands;
 
-    public ItemMapper(String entityName, String itemType, String color, String title, List<String> loreLines, boolean glowing, Map<String, Integer> enchants, boolean usable, int amount, boolean command, String[] commands) {
+    public ItemMapper(String entityName, String itemType, String color, String title, List<String> loreLines, boolean glowing, Map<String, Integer> enchants, boolean usable, int amount, boolean command, String[] commands, String skullTexture, String skullUuid, Map<String, String> nbtStrings, Map<String, Boolean> nbtBooleans, Map<String, Integer> nbtInts, Map<String, Float> nbtFloats) {
         this.Horde_Name = entityName;
         this.Material_Type = itemType;
         this.Material_Color = color;
         this.Display_Name = title;
+        this.Skull_Texture = skullTexture;
+        this.Skull_UUID = skullUuid;
+        this.NBT_Strings = nbtStrings;
+        this.NBT_Booleans = nbtBooleans;
+        this.NBT_Integers = nbtInts;
+        this.NBT_Floats = nbtFloats;
         this.Lore_Lines = loreLines;
         this.Glowing = glowing;
         this.Usable = usable;
@@ -43,7 +60,6 @@ public class ItemMapper {
         this.Amount = amount;
         this.Right_Click_Command_Enabled = command;
         this.Commands = commands;
-
     }
 
     public ItemMapper setAmount(int amount) {
@@ -121,5 +137,21 @@ public class ItemMapper {
         return item;
     }
 
-
+    private ItemStack getHead() {
+        ItemStack head = new ItemStack(Material.SKULL_ITEM, this.Amount, (short)3);
+        SkullMeta headMeta = (SkullMeta)head.getItemMeta();
+        GameProfile profile = new GameProfile(UUID.fromString(this.Skull_UUID), "");
+        profile.getProperties().put("textures", new Property("textures", this.Skull_Texture));
+        try {
+            Field profileField = headMeta.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(headMeta, profile);
+        } catch (IllegalArgumentException|NoSuchFieldException|SecurityException|IllegalAccessException error) {
+            error.printStackTrace();
+        }
+        head.setItemMeta((ItemMeta)headMeta);
+        return head;
+    }
 }
+
+
