@@ -19,10 +19,13 @@ repositories {
         url = uri("https://repo.codemc.io/repository/maven-public/")
     }
     maven {
-        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/releases/'
     }
     maven {
         url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
+    }
+    maven {
+        url = "https://libraries.minecraft.net/"
     }
 }
 
@@ -33,6 +36,7 @@ dependencies {
     implementation("de.tr7zw:item-nbt-api:2.11.2")
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
     compileOnly 'me.clip:placeholderapi:2.11.3'
+    compileOnly('com.mojang:authlib:1.5.21')
 }
 
 build {
