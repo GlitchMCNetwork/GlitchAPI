@@ -7,7 +7,7 @@ plugins {
 group 'dev.selena.glitchmc'
 version '1.0.0'
 apply plugin: 'java'
-defaultTasks('build', 'javadoc')
+defaultTasks('build')
 
 repositories {
     mavenCentral()
