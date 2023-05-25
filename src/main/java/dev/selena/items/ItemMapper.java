@@ -137,6 +137,10 @@ public class ItemMapper {
         return item;
     }
 
+    /***
+     * Used for generating the head
+     * @return The head ItemStack
+     */
     private ItemStack getHead() {
         ItemStack head = new ItemStack(Material.SKULL_ITEM, this.Amount, (short)3);
         SkullMeta headMeta = (SkullMeta)head.getItemMeta();
