@@ -164,17 +164,17 @@ public class ItemMapperBuilder {
     }
 
     public ItemMapperBuilder addNBTBoolean(String name, boolean value) {
-        this.nbtBooleans.put(name, Boolean.valueOf(value));
+        this.nbtBooleans.put(name, value);
         return this;
     }
 
     public ItemMapperBuilder addNBTInt(String name, int value) {
-        this.nbtInts.put(name, Integer.valueOf(value));
+        this.nbtInts.put(name, value);
         return this;
     }
 
     public ItemMapperBuilder addNBTFloat(String name, float value) {
-        this.nbtFloats.put(name, Float.valueOf(value));
+        this.nbtFloats.put(name, value);
         return this;
     }
 

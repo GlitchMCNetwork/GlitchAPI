@@ -1,5 +1,6 @@
 package dev.selena.text;
 
+import dev.selena.GlitchAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -32,8 +33,16 @@ public class MessageUtils {
         sender.sendMessage(ContentUtils.color(content));
     }
 
+    @Deprecated
+    /*
+    Use consoleSend(String) instead
+     */
     public static void consoleSend(String content, JavaPlugin server) {
         server.getLogger().info(ContentUtils.color(content));
+    }
+
+    public static void consoleSend(String content) {
+        GlitchAPI.getPlugin().getLogger().info(ContentUtils.color(content));
     }
 
     public static void announce(String message) {
