@@ -44,11 +44,10 @@ build {
     dependsOn shadowJar
 }
 
-javadoc {
-    source = sourceSets.main.allJava
-    destinationDir = file("C:/Users/selen/Dropbox/GlitchMC/GlitchAPIDocs/docs")
-
-}
+//javadoc {
+//    source = sourceSets.main.allJava
+//    destinationDir = file("C:/Users/selen/Dropbox/GlitchMC/GlitchAPIDocs/docs")
+//}
 
 shadowJar {
 
