@@ -1,9 +1,10 @@
-package dev.selena;
+package dev.selena.config;
+
+import dev.selena.GlitchAPI;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.EnumSet;
 
 public class FileManager {
 
@@ -28,9 +29,19 @@ public class FileManager {
     }
 
 
-    public static <T> T loadFile(Class<T> clazz, File file) throws IOException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
-        return ConfigLoader.loadConfig(clazz, file);
+    public static <T> T loadFile(Class<T> clazz, File file) {
+        try {
+            return ConfigLoader.loadConfig(clazz, file);
+        } catch (IOException | InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException | NoSuchMethodException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return null;
     }
+
+
 
     public static FileManager get() {
         return instance;

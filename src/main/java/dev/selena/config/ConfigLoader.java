@@ -1,4 +1,4 @@
-package dev.selena;
+package dev.selena.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
