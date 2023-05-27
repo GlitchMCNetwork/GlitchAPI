@@ -1,17 +1,13 @@
 package dev.selena.text;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class ContentUtils {
 
 
     public static String color(String content) {
-        return ChatColor.translateAlternateColorCodes('&', content);
+        return PlaceholderAPI.setPlaceholders(null, ChatColor.translateAlternateColorCodes('&', content));
     }
 
 
