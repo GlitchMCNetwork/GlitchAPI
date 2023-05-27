@@ -2,6 +2,7 @@ package dev.selena.consts;
 
 public class NBTConsts {
 
+    public static String GLITCH_ITEM = "IS_GLITCH_ITEM";
     public static String HORDE_ITEM = "IS_HORDE";
     public static String HORDE_NAME = "HORDE_NAME";
     public static String HORDE_DROP_ANNOUNCEMENT = "HORDE_DROP_ANNOUNCEMENT";
