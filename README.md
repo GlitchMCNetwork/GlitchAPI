@@ -64,49 +64,11 @@ GlitchMCPassword=PASSWORD ON DISCORD
     public void onEnable() {
         GlitchAPI.setPlugin(this);
         boolean isLatest = GlitchAPI.isLatest("PATH TO PROJECT IN THE PRIVATE REPOS"); // Used for checking if the plugin is on the latest version. 
+        EnumSet.allOf(Configs.class).forEach(Configs::getConfig); // Only used of you are using the Config function of the API, be sure to add the Configs class
     }
 ```
-If you want to use the Config files be sure to add the following classes and add `new FileManager().loadFiles();` into your onEnable method
-
-`FileManager.java`
-```java
-public class FileManager {
 
 
-    private static FileManager instance;
-
-    public FileManager() {
-        FileManager.instance = this;
-    }
-
-
-
-    public void loadFiles() {
-        Configs.CONFIG.getConfig();
-    }
-
-    public static File file(String parent, String file) {
-
-        return new File(folderPath(parent) + file);
-    }
-
-    public static String folderPath(String path) {
-        File file = new File("plugins" + File.separator + GlitchHordesMain.get().getName(), path);
-        if (!file.exists())
-            file.mkdirs();
-        return file.getPath() + File.separator;
-    }
-
-
-    public static <T> T loadFile(Class<T> clazz, File file) throws IOException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
-        return ConfigLoader.loadConfig(clazz, file);
-    }
-
-    public static FileManager get() {
-        return instance;
-    }
-}
-```
 
 `Configs.java`
 ```java
