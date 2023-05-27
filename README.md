@@ -85,22 +85,9 @@ public enum Configs {
     }
 
 
-    public static File file(String parent, String file) {
-
-        return new File(FileManager.folderPath(parent) + file);
-    }
-
     @SuppressWarnings("unchecked")
     public <T> T getConfig() {
-        try {
-            return (T) FileManager.loadFile(clazz, file);
-        } catch (IOException | InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException | NoSuchMethodException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-        return null;
+        return (T) FileManager.loadFile(clazz, file);
     }
 }
 ```
