@@ -64,11 +64,9 @@ GlitchMCPassword=PASSWORD ON DISCORD
     public void onEnable() {
         GlitchAPI.setPlugin(this);
         boolean isLatest = GlitchAPI.isLatest("PATH TO PROJECT IN THE PRIVATE REPOS"); // Used for checking if the plugin is on the latest version. 
+        EnumSet.allOf(Configs.class).forEach(Configs::getConfig); // Only used of you are using the Config function of the API, be sure to add the Configs class
     }
 ```
-If you want to use the Config files be sure to add the following to your onEnable method
-`EnumSet.allOf(Configs.class).forEach(Configs::getConfig);`
-This itterates through all the Enum values for the `Configs.java` Enum
 
 
 
