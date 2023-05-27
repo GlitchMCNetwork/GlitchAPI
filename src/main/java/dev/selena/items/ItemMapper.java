@@ -69,7 +69,30 @@ public class ItemMapper {
 
     public ItemStack createItemStack() {
         ItemStack item = new ItemStack(Material.valueOf(Material_Type));
+        if (item.getType() == Material.SKULL_ITEM)
+            item = getHead();
         NBTItem nbtItem = new NBTItem(item);
+        nbtItem.setBoolean(NBTConsts.GLITCH_ITEM, true);
+        if (!NBT_Floats.isEmpty()) {
+            for(String key : NBT_Floats.keySet()) {
+                nbtItem.setFloat(key, NBT_Floats.get(key));
+            }
+        }
+        if (!NBT_Integers.isEmpty()) {
+            for(String key : NBT_Integers.keySet()) {
+                nbtItem.setInteger(key, NBT_Integers.get(key));
+            }
+        }
+        if (!NBT_Strings.isEmpty()) {
+            for(String key : NBT_Strings.keySet()) {
+                nbtItem.setString(key, NBT_Strings.get(key));
+            }
+        }
+        if (!NBT_Booleans.isEmpty()) {
+            for(String key : NBT_Booleans.keySet()) {
+                nbtItem.setBoolean(key, NBT_Booleans.get(key));
+            }
+        }
         if (Horde_Name != null) {
             nbtItem.setBoolean(NBTConsts.HORDE_ITEM, true);
             nbtItem.setString(NBTConsts.HORDE_NAME, Horde_Name);
@@ -154,6 +177,7 @@ public class ItemMapper {
             error.printStackTrace();
         }
         head.setItemMeta((ItemMeta)headMeta);
+
         return head;
     }
 }
