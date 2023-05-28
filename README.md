@@ -1,5 +1,7 @@
 # GlitchAPI
 API for GlitchMC plugins.
+Latest version 
+![Version](https://repo.jadeisacutie.com/api/badge/latest/releases/dev/selena/glitchmc/GlitchAPI)
 
 usage
 
@@ -22,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'dev.selena.glitchmc:GlitchAPI:1.0.0'
+    implementation 'dev.selena.glitchmc:GlitchAPI:VERSION'
 }
 
 shadowJar {
