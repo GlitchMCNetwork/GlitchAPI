@@ -73,22 +73,22 @@ public class ItemMapper {
             item = getHead();
         NBTItem nbtItem = new NBTItem(item);
         nbtItem.setBoolean(NBTConsts.GLITCH_ITEM, true);
-        if (!NBT_Floats.isEmpty()) {
+        if (NBT_Floats != null) {
             for(String key : NBT_Floats.keySet()) {
                 nbtItem.setFloat(key, NBT_Floats.get(key));
             }
         }
-        if (!NBT_Integers.isEmpty()) {
+        if (NBT_Integers != null) {
             for(String key : NBT_Integers.keySet()) {
                 nbtItem.setInteger(key, NBT_Integers.get(key));
             }
         }
-        if (!NBT_Strings.isEmpty()) {
+        if (NBT_Strings != null) {
             for(String key : NBT_Strings.keySet()) {
                 nbtItem.setString(key, NBT_Strings.get(key));
             }
         }
-        if (!NBT_Booleans.isEmpty()) {
+        if (NBT_Booleans != null) {
             for(String key : NBT_Booleans.keySet()) {
                 nbtItem.setBoolean(key, NBT_Booleans.get(key));
             }

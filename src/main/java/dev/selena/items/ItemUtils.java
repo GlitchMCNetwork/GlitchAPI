@@ -1,9 +1,13 @@
 package dev.selena.items;
 
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.Map;
 
 public class ItemUtils implements Listener {
 
@@ -20,6 +24,25 @@ public class ItemUtils implements Listener {
             return;
         }
         player.getInventory().setItemInHand(new ItemStack(Material.AIR));
+    }
+
+    public static void deleteAllOfItem(Inventory inv, Map<String, String> nbtString, Material type) {
+        for (ItemStack item : inv.getContents()) {
+            if (item.getType() != type)
+                continue;
+            NBTItem nbtItem = new NBTItem(item);
+            boolean matches = true;
+            for (String key : nbtString.keySet()) {
+                if (!nbtItem.getString(key).equals(nbtString.get(key))) {
+                    matches = false;
+                    break;
+                }
+            }
+            if (!matches)
+                continue;
+            item.setType(Material.AIR);
+        }
+
     }
 
     /***

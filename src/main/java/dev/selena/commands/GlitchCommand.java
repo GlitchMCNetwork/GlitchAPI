@@ -66,10 +66,6 @@ public abstract class GlitchCommand {
             if(helpAnnotation != null) helpMessages.put(helpAnnotation.command(), method);
         }
 
-//        for(Method method : obj.getClass().getMethods()) {
-//        	
-//            
-//        }
     }
 
     public void handle(String command, Arguments commandArgs) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -81,12 +77,11 @@ public abstract class GlitchCommand {
             int currentArgument = 0;
 
             List<String> unknownArguments = new ArrayList<>();
-            currentArgument = 0;
             int optionalCount = 0;
             for(CommandHandler.Argument argument : handler.getArguments()) {
                 if(argument instanceof CommandHandler.Argument.UnknownArgument) {
                     if (currentArgument < arguments.size())
-                    unknownArguments.add(arguments.get(currentArgument));
+                        unknownArguments.add(arguments.get(currentArgument));
                 }
                 if(argument instanceof CommandHandler.Argument.OptionalArgument) {
                     optionalCount++;
@@ -130,5 +125,8 @@ public abstract class GlitchCommand {
         }
         else commandArgs.getSender().sendMessage(ChatColor.RED + "Invalid arguments.");
     }
+
+    
+
 
 }

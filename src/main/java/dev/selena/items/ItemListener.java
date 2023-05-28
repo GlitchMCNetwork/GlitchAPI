@@ -17,10 +17,14 @@ public class ItemListener implements Listener {
             return;
         ItemStack item = event.getItem();
         NBTItem nItem = new NBTItem(item);
+
         if (!nItem.hasCustomNbtData())
+            return;
+        if (!nItem.getBoolean(NBTConsts.GLITCH_ITEM))
             return;
         if (event.getAction() == Action.LEFT_CLICK_BLOCK)
             return;
+
         if (nItem.getBoolean(NBTConsts.COMMANDS_ENABLED)) {
             String[] commands = nItem.getString(NBTConsts.COMMANDS).split(NBTConsts.COMMAND_SPLIT);
             for (String command : commands) {
