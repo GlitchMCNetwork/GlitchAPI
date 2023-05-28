@@ -1,5 +1,7 @@
 # GlitchAPI
 API for GlitchMC plugins.
+Latest version 
+![Version](https://repo.jadeisacutie.com/api/badge/latest/releases/dev/selena/glitchmc/GlitchAPI)
 
 usage
 
@@ -22,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'dev.selena.glitchmc:GlitchAPI:1.0.0'
+    implementation 'dev.selena.glitchmc:GlitchAPI:VERSION'
 }
 
 shadowJar {
@@ -85,22 +87,9 @@ public enum Configs {
     }
 
 
-    public static File file(String parent, String file) {
-
-        return new File(FileManager.folderPath(parent) + file);
-    }
-
     @SuppressWarnings("unchecked")
     public <T> T getConfig() {
-        try {
-            return (T) FileManager.loadFile(clazz, file);
-        } catch (IOException | InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException | NoSuchMethodException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-        return null;
+        return (T) FileManager.loadFile(clazz, file);
     }
 }
 ```
