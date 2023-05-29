@@ -29,6 +29,7 @@ public class ItemMapper {
     public String Display_Name;
     public String Skull_Texture;
     public String Skull_UUID;
+    public String Skull_Owner;
     public Map<String, String> NBT_Strings;
     public Map<String, Boolean> NBT_Booleans;
     public Map<String, Integer> NBT_Integers;
@@ -42,13 +43,14 @@ public class ItemMapper {
     public boolean Right_Click_Command_Enabled;
     public String[] Commands;
 
-    public ItemMapper(String entityName, String itemType, String color, String title, List<String> loreLines, boolean glowing, Map<String, Integer> enchants, boolean usable, int amount, boolean command, String[] commands, String skullTexture, String skullUuid, Map<String, String> nbtStrings, Map<String, Boolean> nbtBooleans, Map<String, Integer> nbtInts, Map<String, Float> nbtFloats) {
+    public ItemMapper(String entityName, String itemType, String color, String title, List<String> loreLines, boolean glowing, Map<String, Integer> enchants, boolean usable, int amount, boolean command, String[] commands, String skullTexture, String skullUuid, String skullOwner, Map<String, String> nbtStrings, Map<String, Boolean> nbtBooleans, Map<String, Integer> nbtInts, Map<String, Float> nbtFloats) {
         this.Horde_Name = entityName;
         this.Material_Type = itemType;
         this.Material_Color = color;
         this.Display_Name = title;
         this.Skull_Texture = skullTexture;
         this.Skull_UUID = skullUuid;
+        this.Skull_Owner = skullOwner;
         this.NBT_Strings = nbtStrings;
         this.NBT_Booleans = nbtBooleans;
         this.NBT_Integers = nbtInts;
@@ -167,16 +169,21 @@ public class ItemMapper {
     private ItemStack getHead() {
         ItemStack head = new ItemStack(Material.SKULL_ITEM, this.Amount, (short)3);
         SkullMeta headMeta = (SkullMeta)head.getItemMeta();
-        GameProfile profile = new GameProfile(UUID.fromString(this.Skull_UUID), "");
-        profile.getProperties().put("textures", new Property("textures", this.Skull_Texture));
-        try {
-            Field profileField = headMeta.getClass().getDeclaredField("profile");
-            profileField.setAccessible(true);
-            profileField.set(headMeta, profile);
-        } catch (IllegalArgumentException|NoSuchFieldException|SecurityException|IllegalAccessException error) {
-            error.printStackTrace();
+        if (Skull_Owner != null)
+            headMeta.setOwner(Skull_Owner);
+        GameProfile profile = new GameProfile(UUID.fromString(this.Skull_UUID), Skull_Owner == null ? "" : Skull_Owner);
+        if (Skull_Texture != null) {
+            profile.getProperties().put("textures", new Property("textures", this.Skull_Texture));
+            try {
+                Field profileField = headMeta.getClass().getDeclaredField("profile");
+                profileField.setAccessible(true);
+                profileField.set(headMeta, profile);
+            } catch (IllegalArgumentException | NoSuchFieldException | SecurityException |
+                     IllegalAccessException error) {
+                error.printStackTrace();
+            }
         }
-        head.setItemMeta((ItemMeta)headMeta);
+        head.setItemMeta(headMeta);
 
         return head;
     }

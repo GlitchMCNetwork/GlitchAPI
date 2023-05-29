@@ -13,6 +13,7 @@ public class ItemMapperBuilder {
     private String title = null;
     private String skullTexture = null;
     private String skullUuid = null;
+    private String skullOwner = null;
     private List<String> loreLines = null;
     private final Map<String, String> nbtStrings = new TreeMap<>();
     private final Map<String, Boolean> nbtBooleans = new TreeMap<>();
@@ -158,6 +159,11 @@ public class ItemMapperBuilder {
         return this;
     }
 
+    public ItemMapperBuilder skullOwner(String owner) {
+        this.skullOwner = owner;
+        return this;
+    }
+
     public ItemMapperBuilder addNBTString(String name, String value) {
         this.nbtStrings.put(name, value);
         return this;
@@ -183,7 +189,7 @@ public class ItemMapperBuilder {
      * @return ItemMapper
      */
     public ItemMapper build() {
-        return new ItemMapper(this.entityName, this.itemType, this.itemColor, this.title, this.loreLines, this.glowing, this.enchants, this.usable, this.amount, this.commandItem, this.commands, this.skullTexture, this.skullUuid, this.nbtStrings, this.nbtBooleans, this.nbtInts, this.nbtFloats);
+        return new ItemMapper(this.entityName, this.itemType, this.itemColor, this.title, this.loreLines, this.glowing, this.enchants, this.usable, this.amount, this.commandItem, this.commands, this.skullTexture, this.skullUuid, this.skullOwner, this.nbtStrings, this.nbtBooleans, this.nbtInts, this.nbtFloats);
     }
 
 }
